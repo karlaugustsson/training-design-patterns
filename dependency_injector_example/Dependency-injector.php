@@ -33,6 +33,6 @@ $di->registerService("gravatar",function() use($config) {
 	
 
 $gravatar = $di->getService("gravatar");
-print($gravatar->getGravatar(100,"mm","g",true));
+print($gravatar->getGravatar(500,"mm","g",true));
  //;
 

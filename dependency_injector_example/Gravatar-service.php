@@ -3,6 +3,8 @@
 class GravatarService{
 	private $email = null;
 	private $gravatar_url  = 'https://www.gravatar.com/avatar/'; 
+
+	private $allowed_imageset = array("404" , "mm" , "identicon" , "monsterid" , "wavatar" ) ;
 	
 	public function __construct($email){
 		$this->setEmail($email) ;
@@ -24,6 +26,11 @@ class GravatarService{
 	}
 
 	public function Getgravatar($size , $default = "mm" , $r = "g" , $img = false , $attributes = array() ){
+
+		if( ! in_array($default , $this->allowed_imageset) ){
+			throw new Exception("incorrect imageset given: " . $default. " , allowed imagset are " . implode("," , $this->allowed_imageset  ) ,1);
+			
+		}
 		$url = $this->gravatar_url . "?s=$size&d=$default&r=$r";
 	    if ( $img ) {
 	        $url = '<img src="' . $url . '"';
